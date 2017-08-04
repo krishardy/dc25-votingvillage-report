@@ -287,7 +287,7 @@ search for "iVotronic PEB password".
 
 ### Kris
 
-Kris Hardey ([email redacted])
+Kris Hardy ([email redacted])
 
 Kris and his team focused on attacking access to the PEB and PEB
 readers (the ES&S iVotronic uses a small device called a personal
@@ -306,39 +306,39 @@ the software.  They got the firmware off of one of the chips and have
 decompiled it.  It looks reasonable, but they did not have time to do
 much more before the village closed shop on Sunday.
 
-There is a flash memory chip on the board, an Atmel AT58DB161B SPI
-Flash memory chip (JLH: Not sure the AT58 exists; maybe this should be
-[AT45DB161B][12]). Chip for the IRdA port (IR input/output) is the [TI
+There is a flash memory chip on the board, an Atmel [AT45DB161B][12] SPI
+Flash memory chip. Chip for the IRdA port (IR input/output) is the [TI
 TIR1000][13].  They had not yet pulled the data off of the flash
 memory off of the Atmel chip.
 
-Here is the pin out (using the PICkit 3):
+Here is the pin out of the programming headers on the devices:
 
-For the PEB (chip pin, chip function):
+For the PEB (programming header pin, chip function):
 
-* pin 1, `pgd`
-* pin 2, `mclr/vpp`
+* pin 1, `PGD`
+* pin 2, `~MCLR/Vpp`
 * pin 3, not sure
-* pin 4, `pgc`
-* pin 5, `pgm`
-* pin 6, `vss`
-* pin 7, `bdd`
+* pin 4, `PGC`
+* pin 5, `PGM`
+* pin 6, `Vss`
+* pin 7, `Vdd`
 
-For the PEB reader:
+For the PEB reader (programming header pin, chip function).  Pin 1 is
+next to the `J3` screenprint on the PEB reader PCB:
 
 * pin 1 & 2, unsure (didn't use)
-* pin 3, `pgc`
-* pin 4, `pgd`
-* pin 5, `vss`
-* pin 6, `vdd`
-* pin 7, `mclr/vpp`
-* pin 1, `pgm` (unlabeled; used `j3` screen on the PEB reader PCB. Pin
-  is not connected to the header, instead connected with a jumper).
+* pin 3, `PGC`
+* pin 4, `PGD`
+* pin 5, `Vss`
+* pin 6, `Vdd`
+* pin 7, `~MCLR/Vpp`
+* Note: `PGM` is not connected to the programming header, so it was
+connected to directly using a probe.
 
-Toolchain for reading (that is, IDE toolchain) was [Microchip
-MPLAB-X][14] and for decompilation they used [gputils][15].
+Toolchain (IDE & reading/writing firmware) was [Microchip MPLAB-X][14]
+and for decompilation they used [gputils][15].
 
-PEB reader: PIC model: [PIC18F2455][16].  They were Able to pull the
+PEB reader: PIC model: [PIC18F2455][16].  They were able to pull the
 firmware off of one of those as well.  Have not decompiled, security
 fuses may be set here, in which case it will be garbage.
 
